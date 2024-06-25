@@ -80,3 +80,36 @@ optPlayersSolNoPod, optPointsSolNoPod = calcPlayersWithPriceNoPod(players, playe
 print("End")
 print("Players",optPlayersSolNoPod)
 print("Points",optPointsSolNoPod)
+
+#Prueba 4: Obtener datos reales de diferentes jornadas y comparar con la maxima puntuacion de esa jornada
+
+players = getPlayersByAverage(6, 5)
+points = getPlayersPointsByAverage(players, 6, 5)
+print(points)
+prices = getPlayersPrice(players)
+positions = getPositions(players)
+playersAveragePrice = getAveragePrice(players)
+priceLimitBase = playersAveragePrice*11
+priceLimitBase *= 2
+print(priceLimitBase)
+startTime = time.time()
+print(startTime)
+
+optPlayers, optPoints = calcPlayersWithPrice(players, prices, points, positions, positionLimits433, priceLimitBase, 0, [], 0, 0, currentPositions, startTime, 300)
+
+print(optPlayers,optPoints)
+
+players = getPlayersInRound(24)
+points = getPlayersPointsInRound(players,24)
+prices = getPlayersPrice(players)
+positions = getPositions(players)
+playersAveragePrice = getAveragePrice(players)
+priceLimitBase = playersAveragePrice*11
+priceLimitBase *= 2
+print(priceLimitBase)
+startTime = time.time()
+print(startTime)
+
+optPlayers, optPoints = calcPlayersWithPrice(players, prices, points, positions, positionLimits433, priceLimitBase, 0, [], 0, 0, currentPositions, startTime, 300)
+
+print(optPlayers,optPoints)

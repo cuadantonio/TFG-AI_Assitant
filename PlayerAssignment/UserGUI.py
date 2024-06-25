@@ -53,7 +53,7 @@ layout = [
     ]
 ]
 
-window = sg.Window("User GUI", layout)
+window = sg.Window("Cálculo alineación", layout)
 while True:
     pyGuiEvent, values = window.read()
     if pyGuiEvent == "Exit" or pyGuiEvent == sg.WIN_CLOSED:
@@ -70,8 +70,8 @@ while True:
         priceLimit = values["-LIMPRE-"]
 
     if pyGuiEvent == "-LIMTIE-":
-        timeLimit = int(values["-LIMTIE-"])
-        timeLimit = timeLimit * 60
+        timeLimit = values["-LIMTIE-"]
+
 
     if pyGuiEvent == "-FORMS-":
         print(lastRounds)
@@ -107,6 +107,8 @@ while True:
         print(type(round))
         print(type(lastRounds))
 
+        timeLimit = int(timeLimit)
+        timeLimit = timeLimit * 60
         priceLimit = int(priceLimit)
         round = int(round)
 
@@ -118,9 +120,9 @@ while True:
                 continue
 
         inicioC = time.time()
-        players = getPlayersBySum(round, lastRounds)
+        players = getPlayersByAverage(round, lastRounds)
         prices = getPlayersPrice(players)
-        points = getPlayersPointsBySum(players, round, lastRounds)
+        points = getPlayersPointsByAverage(players, round, lastRounds)
         positions = getPositions(players)
         print('Got it')
         startTime = time.time()
@@ -132,8 +134,8 @@ while True:
         execTime = str(int(finC - inicioC))
         execTimeText = 'Tiempo de ejecucion: ' + execTime + ' segundos'
         optPointsSol = str(optPointsSol)
-        newPoints = str(int(sum(getPlayersPointsInRound(optPlayersSol,round))))
-        pointsText = 'Puntos obtenidos: ' + newPoints
+        newPoints = str(int(sum(getPlayersPointsInRound(optPlayersSol, round))))
+        pointsText = 'Puntos obtenidos: ' + optPointsSol
 
         if optPlayersSol != []:
             pygame.init()
@@ -216,7 +218,7 @@ while True:
                 # Manejo de eventos
 
                 pygame.display.flip()
-            def draw442(players, imagesUrls):
+            def draw442(players, imagesUrls, points, execTime):
                 basePositions = {
                     "Goalkeeper": (WIDTH // 2, HEIGHT // 7),
                     "Defender": [(WIDTH // 4, HEIGHT // 3), (1.6 * WIDTH // 4, HEIGHT // 3),
@@ -244,8 +246,22 @@ while True:
                             basePosition = basePositions["Attacker"][j]
                         drawPlayer(basePosition, name, imageUrl)
 
+                pointsFont = pygame.font.SysFont("Gill Sans", 20)
+                pointsText = pointsFont.render(points, True, BLACK, WHITE)
+                pointsRect = pointsText.get_rect()
+                pointsRect.center = (
+                    WIDTH // 2, HEIGHT - 10)
+                screen.blit(pointsText, pointsRect)
+
+                execTimeFont = pygame.font.SysFont("Gill Sans", 20)
+                execTimeText = execTimeFont.render(execTime, True, BLACK, WHITE)
+                execTimeRect = execTimeText.get_rect()
+                execTimeRect.center = (
+                    WIDTH // 2, HEIGHT - 31)
+                screen.blit(execTimeText, execTimeRect)
+
                 pygame.display.flip()
-            def draw541(players, imagesUrls):
+            def draw541(players, imagesUrls, points, execTime):
                 basePositions = {
                     "Goalkeeper": (WIDTH // 2, HEIGHT // 7),
                     "Defender": [(WIDTH // 4, HEIGHT // 3), (1.5 * WIDTH // 4, HEIGHT // 3), (2 * WIDTH // 4, HEIGHT // 3),
@@ -272,8 +288,22 @@ while True:
                             basePosition = basePositions["Attacker"][j]
                         drawPlayer(basePosition, name, imageUrl)
 
+                pointsFont = pygame.font.SysFont("Gill Sans", 20)
+                pointsText = pointsFont.render(points, True, BLACK, WHITE)
+                pointsRect = pointsText.get_rect()
+                pointsRect.center = (
+                    WIDTH // 2, HEIGHT - 10)
+                screen.blit(pointsText, pointsRect)
+
+                execTimeFont = pygame.font.SysFont("Gill Sans", 20)
+                execTimeText = execTimeFont.render(execTime, True, BLACK, WHITE)
+                execTimeRect = execTimeText.get_rect()
+                execTimeRect.center = (
+                    WIDTH // 2, HEIGHT - 31)
+                screen.blit(execTimeText, execTimeRect)
+
                 pygame.display.flip()
-            def draw451(players, imagesUrls):
+            def draw451(players, imagesUrls, points, execTime):
                 basePositions = {
                     "Goalkeeper": (WIDTH // 2, HEIGHT // 7),
                     "Defender": [(WIDTH // 4, HEIGHT // 3), (1.6 * WIDTH // 4, HEIGHT // 3),
@@ -301,8 +331,22 @@ while True:
                             basePosition = basePositions["Attacker"][j]
                         drawPlayer(basePosition, name, imageUrl)
 
+                pointsFont = pygame.font.SysFont("Gill Sans", 20)
+                pointsText = pointsFont.render(points, True, BLACK, WHITE)
+                pointsRect = pointsText.get_rect()
+                pointsRect.center = (
+                    WIDTH // 2, HEIGHT - 10)
+                screen.blit(pointsText, pointsRect)
+
+                execTimeFont = pygame.font.SysFont("Gill Sans", 20)
+                execTimeText = execTimeFont.render(execTime, True, BLACK, WHITE)
+                execTimeRect = execTimeText.get_rect()
+                execTimeRect.center = (
+                    WIDTH // 2, HEIGHT - 31)
+                screen.blit(execTimeText, execTimeRect)
+
                 pygame.display.flip()
-            def draw352(players, imagesUrls):
+            def draw352(players, imagesUrls, points, execTime):
                 basePositions = {
                     "Goalkeeper": (WIDTH // 2, HEIGHT // 7),
                     "Defender": [(WIDTH // 4, HEIGHT // 3), (WIDTH // 2, HEIGHT // 3), (3 * WIDTH // 4, HEIGHT // 3)],
@@ -329,8 +373,22 @@ while True:
                             basePosition = basePositions["Attacker"][j]
                         drawPlayer(basePosition, name, imageUrl)
 
+                pointsFont = pygame.font.SysFont("Gill Sans", 20)
+                pointsText = pointsFont.render(points, True, BLACK, WHITE)
+                pointsRect = pointsText.get_rect()
+                pointsRect.center = (
+                    WIDTH // 2, HEIGHT - 10)
+                screen.blit(pointsText, pointsRect)
+
+                execTimeFont = pygame.font.SysFont("Gill Sans", 20)
+                execTimeText = execTimeFont.render(execTime, True, BLACK, WHITE)
+                execTimeRect = execTimeText.get_rect()
+                execTimeRect.center = (
+                    WIDTH // 2, HEIGHT - 31)
+                screen.blit(execTimeText, execTimeRect)
+
                 pygame.display.flip()
-            def draw433(players, imagesUrls):
+            def draw433(players, imagesUrls, points, execTime):
                 basePositions = {
                     "Goalkeeper": (WIDTH // 2, HEIGHT // 7),
                     "Defender": [(WIDTH // 4, HEIGHT // 3), (1.6 * WIDTH // 4, HEIGHT // 3),
@@ -358,8 +416,22 @@ while True:
                             basePosition = basePositions["Attacker"][j]
                         drawPlayer(basePosition, name, imageUrl)
 
+                pointsFont = pygame.font.SysFont("Gill Sans", 20)
+                pointsText = pointsFont.render(points, True, BLACK, WHITE)
+                pointsRect = pointsText.get_rect()
+                pointsRect.center = (
+                    WIDTH // 2, HEIGHT - 10)
+                screen.blit(pointsText, pointsRect)
+
+                execTimeFont = pygame.font.SysFont("Gill Sans", 20)
+                execTimeText = execTimeFont.render(execTime, True, BLACK, WHITE)
+                execTimeRect = execTimeText.get_rect()
+                execTimeRect.center = (
+                    WIDTH // 2, HEIGHT - 31)
+                screen.blit(execTimeText, execTimeRect)
+
                 pygame.display.flip()
-            def draw532(players, imagesUrls):
+            def draw532(players, imagesUrls, points, execTime):
                 basePositions = {
                     "Goalkeeper": (WIDTH // 2, HEIGHT // 7),
                     "Defender": [(WIDTH // 4, HEIGHT // 3), (1.5 * WIDTH // 4, HEIGHT // 3), (2 * WIDTH // 4, HEIGHT // 3),
@@ -386,23 +458,37 @@ while True:
                             basePosition = basePositions["Attacker"][j]
                         drawPlayer(basePosition, name, imageUrl)
 
+                pointsFont = pygame.font.SysFont("Gill Sans", 20)
+                pointsText = pointsFont.render(points, True, BLACK, WHITE)
+                pointsRect = pointsText.get_rect()
+                pointsRect.center = (
+                    WIDTH // 2, HEIGHT - 10)
+                screen.blit(pointsText, pointsRect)
+
+                execTimeFont = pygame.font.SysFont("Gill Sans", 20)
+                execTimeText = execTimeFont.render(execTime, True, BLACK, WHITE)
+                execTimeRect = execTimeText.get_rect()
+                execTimeRect.center = (
+                    WIDTH // 2, HEIGHT - 31)
+                screen.blit(execTimeText, execTimeRect)
+
                 pygame.display.flip()
 
             match option:
                 case 1:
                     draw343(playerNames, playerPhotos,pointsText,execTimeText)
                 case 2:
-                    draw352(playerNames, playerPhotos)
+                    draw352(playerNames, playerPhotos,pointsText,execTimeText)
                 case 3:
-                    draw433(playerNames, playerPhotos)
+                    draw433(playerNames, playerPhotos,pointsText,execTimeText)
                 case 4:
-                    draw442(playerNames, playerPhotos)
+                    draw442(playerNames, playerPhotos,pointsText,execTimeText)
                 case 5:
-                    draw451(playerNames, playerPhotos)
+                    draw451(playerNames, playerPhotos,pointsText,execTimeText)
                 case 6:
-                    draw532(playerNames, playerPhotos)
+                    draw532(playerNames, playerPhotos,pointsText,execTimeText)
                 case 7:
-                    draw541(playerNames, playerPhotos)
+                    draw541(playerNames, playerPhotos,pointsText,execTimeText)
 
 
             pyGameRunning = True

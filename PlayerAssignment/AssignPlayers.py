@@ -537,9 +537,9 @@ def calcPlayersWithPrice(players, prices, points, positions, positionLimits, pri
     if time.time() - startTime > timeLimit:
         return
 
-    if playerIndex == 0:
-        optPointsPod = 0
-        optSolutionPod = []
+    #if playerIndex == 0:
+        #optPointsPod = 0
+        #optSolutionPod = []
 
     if currentPrice > priceLimit:
         return
